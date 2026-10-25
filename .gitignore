@@ -1,0 +1,29 @@
+
+# Java and Maven build output
+**/target/
+
+# Spring Tool Suite / Eclipse workspace files
+.metadata/
+**/.metadata/
+.settings/
+**/.settings/
+.classpath
+.project
+.factorypath
+
+# Logs and temporary files
+*.log
+logs/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/application-local.properties
+**/application-local.yml
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

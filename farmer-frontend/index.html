@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmShare | Fair Prices, Fresh Food</title>
+
+<style>
+:root {
+  --green: #234b35;
+  --green-light: #e7efe5;
+  --cream: #faf8f0;
+  --orange: #df8b45;
+  --text: #24372b;
+  --muted: #718075;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--white);
+  padding: 18px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e9e1;
+}
+
+.logo {
+  color: var(--green);
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: var(--orange);
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  margin-left: 24px;
+  font-weight: 600;
+}
+
+.hero {
+  padding: 65px 7%;
+  background: var(--green);
+  color: white;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1.12;
+  margin: 15px 0;
+}
+
+.hero p {
+  color: #e2ebdf;
+  max-width: 520px;
+  margin-bottom: 25px;
+}
+
+.eyebrow {
+  color: var(--orange);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.hero-image {
+  min-height: 280px;
+  border-radius: 24px;
+  background:
+    linear-gradient(0deg, #173a29aa, transparent),
+    url("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=85")
+    center/cover;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 20px;
+  background: var(--orange);
+  color: #172d20;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  filter: brightness(.95);
+}
+
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+section {
+  padding: 55px 7%;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  color: var(--green);
+  font-size: 30px;
+}
+
+.section-heading p {
+  color: var(--muted);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #e7e9e2;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px #253c2b0a;
+}
+
+.product-photo {
+  height: 165px;
+  background: var(--green-light);
+  display: grid;
+  place-items: center;
+  font-size: 55px;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-info h3 {
+  color: var(--green);
+  font-size: 20px;
+}
+
+.product-info p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 4px 0 12px;
+}
+
+.product-price {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.product-price small {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: normal;
+}
+
+.product-info .btn {
+  width: 100%;
+}
+
+.transparency {
+  background: var(--green-light);
+}
+
+.transparency-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #e4e9df;
+}
+
+.panel h3 {
+  color: var(--green);
+  margin-bottom: 15px;
+}
+
+.field {
+  margin: 14px 0;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+input, select {
+  width: 100%;
+  border: 1px solid #d7ded4;
+  border-radius: 9px;
+  padding: 12px;
+  background: white;
+  font: inherit;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #edf0e9;
+}
+
+.breakdown-row.total {
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green);
+  padding-top: 18px;
+}
+
+.farmer-share {
+  background: var(--green-light);
+  padding: 18px;
+  border-radius: 12px;
+  margin-top: 18px;
+}
+
+.farmer-share strong {
+  color: var(--green);
+  font-size: 26px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.status {
+  margin-top: 15px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #f2f4ee;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.status.error {
+  background: #fff0eb;
+  color: #9b321c;
+}
+
+.status.success {
+  background: #e7f5e8;
+  color: #205c32;
+}
+
+/* Order confirmation card */
+.order-confirmation {
+  margin-top: 18px;
+  padding: 24px;
+  border: 1px solid #cfe4d1;
+  border-radius: 16px;
+  background: #f4fbf4;
+  color: #24372b;
+}
+
+.order-confirmation h3 {
+  color: #205c32;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.order-confirmation .confirmation-subtitle {
+  margin-bottom: 18px;
+  color: #718075;
+}
+
+.order-confirmation .confirmation-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid #dfeade;
+}
+
+.order-confirmation .confirmation-total {
+  font-size: 20px;
+  font-weight: bold;
+  color: #234b35;
+  border-bottom: none;
+  padding-top: 16px;
+}
+
+.order-confirmation .confirmation-badge {
+  display: inline-block;
+  margin: 4px 0 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #dcefe0;
+  color: #205c32;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.order-confirmation .confirmation-note {
+  margin-top: 14px;
+  color: #718075;
+  font-size: 13px;
+}
+footer {
+  background: var(--green);
+  color: white;
+  padding: 30px 7%;
+  text-align: center;
+}
+
+footer p {
+  color: #dce7dc;
+  font-size: 14px;
+}
+
+@media (max-width: 750px) {
+  .hero, .transparency-layout {
+    grid-template-columns: 1fr;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 13px;
+  }
+
+  header {
+    padding: 15px 5%;
+  }
+
+  section, .hero {
+    padding: 40px 5%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Farm<span>Share</span></div>
+  <nav>
+    <a href="#marketplace">Marketplace</a>
+    <a href="#transparency">Price breakdown</a>
+    <a href="#checkout">Checkout</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Fresh from local farms</div>
+      <h1>Good food.<br>Fair prices.</h1>
+      <p>
+        Buy directly from farmers and understand exactly
+        where your money goes with every order.
+      </p>
+      <a class="btn" href="#marketplace">Explore products →</a>
+    </div>
+    <div class="hero-image" role="img"
+         aria-label="Fresh vegetables at a market"></div>
+  </section>
+
+  <section id="marketplace">
+    <div class="section-heading">
+      <div class="eyebrow">The marketplace</div>
+      <h2>Fresh picks from our farms</h2>
+      <p>Products are loaded from your Product Service through the API Gateway.</p>
+    </div>
+
+    <div id="products" class="products">
+      <p>Loading products...</p>
+    </div>
+    <div id="productStatus" class="status" hidden></div>
+  </section>
+
+  <section id="transparency" class="transparency">
+    <div class="section-heading">
+      <div class="eyebrow">No hidden charges</div>
+      <h2>Where does your money go?</h2>
+      <p>See the estimated price breakdown before placing your order.</p>
+    </div>
+
+    <div class="transparency-layout">
+      <div class="panel">
+        <h3>Your selection</h3>
+
+        <div class="field">
+          <label for="selectedProduct">Product</label>
+          <select id="selectedProduct">
+            <option value="">Loading products...</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="quantity">Quantity</label>
+          <input id="quantity" type="number" min="1" value="1">
+        </div>
+
+        <button class="btn" id="calculateBtn" type="button">
+          Update breakdown
+        </button>
+      </div>
+
+      <div class="panel">
+        <h3>Your price breakdown</h3>
+
+        <div class="breakdown-row">
+          <span>Farmer / product amount</span>
+          <strong id="farmerAmount">₹0.00</strong>
+        </div>
+        <div class="breakdown-row">
+          <span>Packaging</span>
+          <strong id="packagingAmount">₹10.00</strong>
+        </div>
+        <div class="breakdown-row">
+          <span>Delivery</span>
+          <strong id="deliveryAmount">₹20.00</strong>
+        </div>
+        <div class="breakdown-row">
+          <span>Platform fee</span>
+          <strong id="platformAmount">₹5.00</strong>
+        </div>
+        <div class="breakdown-row total">
+          <span>Total</span>
+          <strong id="totalAmount">₹35.00</strong>
+        </div>
+
+        <div class="farmer-share">
+          <div>Goes to the farmer</div>
+          <strong id="farmerPercentage">0%</strong>
+          <div id="farmerShareText">Select a product to calculate.</div>
+        </div>
+
+        <p class="note">
+          Estimate uses the project's current pricing rules.
+          The final breakdown is returned by the backend at checkout.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="checkout">
+    <div class="section-heading">
+      <div class="eyebrow">Ready to order?</div>
+      <h2>Complete your order</h2>
+      <p>Submit your order through the API Gateway.</p>
+    </div>
+
+    <div class="panel">
+      <form id="checkoutForm">
+        <div class="field">
+          <label for="customerId">Customer ID</label>
+          <input id="customerId" type="number" value="101" min="1" required>
+        </div>
+
+        <div class="field">
+          <label for="checkoutProduct">Product</label>
+          <select id="checkoutProduct" required>
+            <option value="">Select a product</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="checkoutQuantity">Quantity</label>
+          <input id="checkoutQuantity" type="number" min="1" value="1" required>
+        </div>
+
+        <div class="field">
+          <label for="paymentMethod">Payment method</label>
+          <select id="paymentMethod" required>
+            <option value="UPI">UPI (simulation)</option>
+            <option value="CARD">Card (simulation)</option>
+            <option value="CASH">Cash (simulation)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="deliveryAddress">Delivery address</label>
+          <input id="deliveryAddress" type="text"
+                 placeholder="Enter your delivery address" required>
+        </div>
+
+        <button class="btn" id="checkoutBtn" type="submit">
+          Place order
+        </button>
+      </form>
+
+      <div id="orderStatus" class="status" hidden></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <h3>FarmShare</h3>
+  <p>Connecting farmers and customers through transparent pricing.</p>
+</footer>
+
+<script>
+const API_BASE = "http://localhost:8080";
+
+let products = [];
+let selectedProduct = null;
+
+const money = amount =>
+  new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR"
+  }).format(Number(amount) || 0);
+
+
+  function showStatus(element, message, type = "") {
+  element.hidden = false;
+  element.className = "status " + type;
+  element.textContent = message;
+}
+
+
+function renderOrderConfirmation(element, data) {
+  const order = data.order;
+  const payment = data.payment;
+  const delivery = data.delivery;
+  const transparency = data.transparency;
+
+  const escapeHTML = value =>
+    String(value ?? "—").replace(/[&<>"']/g, character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[character]);
+
+  const productOption =
+    document.getElementById("checkoutProduct").selectedOptions[0];
+
+  const productName = productOption
+    ? productOption.textContent
+    : `Product #${order.productId}`;
+
+  element.hidden = false;
+  element.className = "order-confirmation";
+
+  element.innerHTML = `
+    <h3>✓ Order placed successfully!</h3>
+    <p class="confirmation-subtitle">
+      Thank you for supporting local farmers.
+    </p>
+
+    <span class="confirmation-badge">
+      Order ${escapeHTML(order.status)}
+    </span>
+
+    <div class="confirmation-row">
+      <span>Order ID</span>
+      <strong>${escapeHTML(order.id)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Product</span>
+      <strong>${escapeHTML(productName)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Quantity</span>
+      <strong>${escapeHTML(order.quantity)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Farmer / product amount</span>
+      <strong>${money(transparency.farmerAmount)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Packaging</span>
+      <strong>${money(transparency.packagingCharge)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Delivery charge</span>
+      <strong>${money(transparency.deliveryCharge)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Platform fee</span>
+      <strong>${money(transparency.platformFee)}</strong>
+    </div>
+
+    <div class="confirmation-row confirmation-total">
+      <span>Total amount</span>
+      <strong>${money(transparency.totalAmount)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Farmer's share</span>
+      <strong>${Number(
+        transparency.farmerPercentage
+      ).toFixed(1)}%</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Payment method</span>
+      <strong>${escapeHTML(payment.paymentMethod)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Payment status</span>
+      <strong>${escapeHTML(payment.paymentStatus)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Delivery address</span>
+      <strong>${escapeHTML(delivery.deliveryAddress)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Delivery status</span>
+      <strong>${escapeHTML(delivery.deliveryStatus)}</strong>
+    </div>
+
+    <div class="confirmation-row">
+      <span>Delivery partner</span>
+      <strong>${escapeHTML(delivery.deliveryPartner)}</strong>
+    </div>
+
+    <p class="confirmation-note">
+      Your order details have been received from the backend.
+    </p>
+  `;
+}
+async function loadProducts() {
+  const container = document.getElementById("products");
+  const status = document.getElementById("productStatus");
+
+  try {
+    const response = await fetch(`${API_BASE}/products`);
+
+    if (!response.ok) {
+      throw new Error(`Product request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    products = Array.isArray(data) ? data : [data];
+
+    if (products.length === 0) {
+      container.textContent = "No products are currently available.";
+      return;
+    }
+
+    container.innerHTML = "";
+
+    products.forEach(product => {
+      const card = document.createElement("article");
+      card.className = "product-card";
+
+      const photo = document.createElement("div");
+      photo.className = "product-photo";
+      photo.textContent = "🥬";
+
+      const info = document.createElement("div");
+      info.className = "product-info";
+
+      const name = document.createElement("h3");
+      name.textContent = product.name || "Farm product";
+
+      const description = document.createElement("p");
+      description.textContent =
+        `${product.description || "Fresh farm produce"} · ` +
+        `${product.farmLocation || "Local farm"}`;
+
+      const price = document.createElement("div");
+      price.className = "product-price";
+      price.textContent = money(product.price);
+      const unit = document.createElement("small");
+      unit.textContent = " / unit";
+      price.appendChild(unit);
+
+      const button = document.createElement("button");
+      button.className = "btn";
+      button.textContent = "Choose product";
+      button.type = "button";
+      button.addEventListener("click", () => chooseProduct(product.id));
+
+      info.append(name, description, price, button);
+      card.append(photo, info);
+      container.appendChild(card);
+    });
+
+    fillProductOptions();
+    chooseProduct(products[0].id);
+  } catch (error) {
+    container.textContent = "Products could not be loaded.";
+    showStatus(
+      status,
+      "Could not connect to Product Service through the Gateway.\n" +
+      "Check that the Gateway (8080) and Product Service (8081) are running.\n\n" +
+      error.message,
+      "error"
+    );
+  }
+}
+
+function fillProductOptions() {
+  const selectors = [
+    document.getElementById("selectedProduct"),
+    document.getElementById("checkoutProduct")
+  ];
+
+  selectors.forEach(select => {
+    select.innerHTML = "";
+
+    products.forEach(product => {
+      const option = document.createElement("option");
+      option.value = product.id;
+      option.textContent = `${product.name} — ${money(product.price)}`;
+      select.appendChild(option);
+    });
+  });
+}
+
+function chooseProduct(productId) {
+  selectedProduct = products.find(
+    product => String(product.id) === String(productId)
+  );
+
+  if (!selectedProduct) return;
+
+  document.getElementById("selectedProduct").value = selectedProduct.id;
+  document.getElementById("checkoutProduct").value = selectedProduct.id;
+
+  updateBreakdown();
+}
+
+function updateBreakdown() {
+  const productId = document.getElementById("selectedProduct").value;
+
+  selectedProduct = products.find(
+    product => String(product.id) === String(productId)
+  );
+
+  if (!selectedProduct) return;
+
+  const quantity = Math.max(
+    1,
+    Number(document.getElementById("quantity").value) || 1
+  );
+
+  document.getElementById("quantity").value = quantity;
+
+  const farmer = Number(selectedProduct.price) * quantity;
+  const packaging = 10;
+  const delivery = 20;
+  const platform = 5;
+  const total = farmer + packaging + delivery + platform;
+  const percentage = total > 0 ? farmer / total * 100 : 0;
+
+  document.getElementById("farmerAmount").textContent = money(farmer);
+  document.getElementById("packagingAmount").textContent = money(packaging);
+  document.getElementById("deliveryAmount").textContent = money(delivery);
+  document.getElementById("platformAmount").textContent = money(platform);
+  document.getElementById("totalAmount").textContent = money(total);
+  document.getElementById("farmerPercentage").textContent =
+    percentage.toFixed(1) + "%";
+  document.getElementById("farmerShareText").textContent =
+    `${money(farmer)} of your ${money(total)} total`;
+}
+
+document.getElementById("selectedProduct").addEventListener(
+  "change",
+  updateBreakdown
+);
+
+document.getElementById("quantity").addEventListener(
+  "input",
+  updateBreakdown
+);
+
+document.getElementById("calculateBtn").addEventListener(
+  "click",
+  updateBreakdown
+);
+
+document.getElementById("checkoutProduct").addEventListener(
+  "change",
+  event => {
+    chooseProduct(event.target.value);
+  }
+);
+
+document.getElementById("checkoutQuantity").addEventListener(
+  "input",
+  event => {
+    document.getElementById("quantity").value = event.target.value;
+    updateBreakdown();
+  }
+);
+
+document.getElementById("checkoutForm").addEventListener(
+  "submit",
+  async event => {
+    event.preventDefault();
+
+    const button = document.getElementById("checkoutBtn");
+    const status = document.getElementById("orderStatus");
+
+    const payload = {
+      customerId: Number(document.getElementById("customerId").value),
+      productId: Number(document.getElementById("checkoutProduct").value),
+      quantity: Number(document.getElementById("checkoutQuantity").value),
+      paymentMethod: document.getElementById("paymentMethod").value,
+      deliveryAddress: document.getElementById("deliveryAddress").value.trim()
+    };
+
+    if (!payload.deliveryAddress) {
+      showStatus(status, "Please enter a delivery address.", "error");
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Placing order...";
+
+    try {
+      const response = await fetch(`${API_BASE}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || `Order request failed: ${response.status}`
+        );
+      }
+      
+      renderOrderConfirmation(status, data);
+         } catch (error) {
+      showStatus(
+        status,
+        "Order could not be completed.\n" +
+        "Check that all backend services are running and that Gateway CORS " +
+        "allows this page to connect.\n\n" + error.message,
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = "Place order";
+    }
+  }
+);
+
+loadProducts();
+</script>
+
+</body>
+</html>
